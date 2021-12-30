@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_historial_repaaciones"
+        android:icon="@drawable/ic_baseline_date_range_24"
+        android:title="@string/text_menu_historial_reparaciones"
+        android:enabled="true"
+        android:visible="true"
+        app:showAsAction="ifRoom">
+    </item>
+
+    <item
+        android:id="@+id/menu_reparaciones"
+        android:icon="@drawable/ic_baseline_construction_26"
+        android:title="@string/text_menu_reparaciones"
+        android:enabled="true"
+        android:visible="true"
+        app:showAsAction="ifRoom">
+    </item>
+
+    <item
+        android:id="@+id/menu_vehiculos"
+        android:icon="@drawable/ic_baseline_directions_car_26"
+        android:title="@string/text_menu_vehiculos"
+        android:enabled="true"
+        android:visible="true"
+       >
+    </item>
+
+    <item
+        android:id="@+id/menu_talleres"
+        android:icon="@drawable/ic_baseline_map_26"
+        android:title="@string/text_menu_talleres"
+        android:enabled="true"
+        app:showAsAction="ifRoom">
+    </item>
+
+</menu>

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CarCare</string>
+    <!--Menu Bottom Navegation''-->
+    <string name="text_menu_historial_reparaciones">Hist Reparaciones</string>
+    <string name="text_menu_reparaciones">Reparaciones</string>
+    <string name="text_menu_vehiculos">Vehículos</string>
+    <string name="text_menu_talleres">Talleres</string>
 </resources>
