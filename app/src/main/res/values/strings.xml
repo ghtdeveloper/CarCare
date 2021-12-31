@@ -5,4 +5,22 @@
     <string name="text_menu_reparaciones">Reparaciones</string>
     <string name="text_menu_vehiculos">Vehículos</string>
     <string name="text_menu_talleres">Talleres</string>
+    <!--Data Dummy -->
+    <string name="text_reparacion_dummy">Cambio de Aceite</string>
+    <string name="text_fecha_reparacion_dummy">10 Jul.2021</string>
+    <string name="tex_taller_reparacion_dummy">Autoservicio Mejia</string>
+    <!--Vehiculos -->
+    <string name="text_info_vehiculo_dummy">Kia K5 Azul</string>
+    <string name="text_chasis_dummy">AKFAFAFAACASF</string>
+    <string name="text_tipo_dummy">Sedán</string>
+    <string name="text_info_vehiculo_dummy_2">Hyundai Sonata Blanco</string>
+    <string name="text_chasis_dummy_2">ACAFAFAXXA</string>
+    <string name="text_tipo_dummy_2">Sedán</string>
+    <string name="text_info_vehiculo_dummy_3">Porsche Cayene Verde</string>
+    <string name="text_chasis_dummy_3">ACAGAFQSAFAF</string>
+    <string name="text_tipo_dummy_3">SUV</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
