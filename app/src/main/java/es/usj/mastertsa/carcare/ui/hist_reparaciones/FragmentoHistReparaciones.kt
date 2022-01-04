@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import es.usj.mastertsa.carcare.R
+import es.usj.mastertsa.carcare.databinding.FragmentoHistReparacionesBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +25,10 @@ class FragmentoHistReparaciones : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var bindings : FragmentoHistReparacionesBinding
+
+    private lateinit var registrarReparacion: RegistrarReparacion
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -33,10 +40,31 @@ class FragmentoHistReparaciones : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragmento_hist_reparaciones, container, false)
+
+//        floatingActionButton = view!!.findViewById(R.id.floatingActionButton)
+        bindings =  FragmentoHistReparacionesBinding.inflate(inflater, container,  false)
+        return bindings.root
+
+
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        bindings.floatingActionButton.setOnClickListener { loadRegistrarReparacion() }
+
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    private fun loadRegistrarReparacion()
+    {
+        registrarReparacion = RegistrarReparacion()
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.add(R.id.fragment_container_view,registrarReparacion)?.commit()
+    }//Fin de la funcion loadRegistrarReparacion
+
+
 
     companion object {
         /**
