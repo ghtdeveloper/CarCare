@@ -12,8 +12,8 @@ interface VehiculoDao {
     @Query("Select * from vehiculo")
     fun findAll():List<Vehiculo>
 
-    @Query("Select * FROM vehiculo WHERE ID = id")
-    fun findByID(idVehiculo: Vehiculo)
+    @Query("Select * FROM vehiculo WHERE id = :idVehiculo")
+    fun findByID(idVehiculo: Long): Vehiculo
 
     @Insert
     fun save(vehiculo: Vehiculo)
