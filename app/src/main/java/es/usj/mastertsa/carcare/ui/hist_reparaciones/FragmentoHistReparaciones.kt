@@ -1,15 +1,24 @@
 package es.usj.mastertsa.carcare.ui.hist_reparaciones
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputLayout
 import es.usj.mastertsa.carcare.R
 import es.usj.mastertsa.carcare.databinding.FragmentoHistReparacionesBinding
+import es.usj.mastertsa.carcare.tools.DatePickerFragment
+import java.text.SimpleDateFormat
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +36,9 @@ class FragmentoHistReparaciones : Fragment() {
     private lateinit var bindings : FragmentoHistReparacionesBinding
 
     private lateinit var registrarReparacion: RegistrarReparacion
+    //FVariables
+    private lateinit var selectFechaEntrada : String
+    private lateinit var selectFechaSalida : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,19 +67,44 @@ class FragmentoHistReparaciones : Fragment() {
 
     private fun loadRegistrarReparacion()
     {
-//        registrarReparacion = RegistrarReparacion()
-//        activity?.supportFragmentManager?.beginTransaction()
-//            ?.add(R.id.fragment_container_view,registrarReparacion)?.commit()
-
         val dialogBuilder = AlertDialog.Builder(requireContext())
         val inflater = this.layoutInflater
         val dialogView = inflater.inflate(R.layout.fragment_registrar_reparacion,null)
         dialogBuilder.setView(dialogView)
+         //Custom vista
+        val textFechaEntrada = dialogView.findViewById(R.id.txtFechaEntrada)
+                as EditText
+        val texFechaSalida = dialogView.findViewById(R.id.txtFechaSalida) as EditText
 
+        //Eventos
+        textFechaEntrada.setOnClickListener {
+            val newFragment = DatePickerFragment.newInstance { _, year, month, day ->
+                selectFechaEntrada= year.toString()+ "-" + (month + 1) + "-" + day
+                 textFechaEntrada.setText(selectFechaEntrada)
+            }
+            newFragment.show(requireActivity().supportFragmentManager, "datePicker")
+        }
+        texFechaSalida.setOnClickListener {
+            val newFragment = DatePickerFragment.newInstance { _, year, month, day ->
+                selectFechaSalida= year.toString()+ "-" + (month + 1) + "-" + day
+                texFechaSalida.setText(selectFechaSalida)
+            }
+            newFragment.show(requireActivity().supportFragmentManager, "datePicker")
+        }
         val alertDialog = dialogBuilder.create()
         alertDialog.setTitle("Registrar Reparación")
         alertDialog.show()
     }//Fin de la funcion loadRegistrarReparacion
+
+
+    /*
+        Se obtiene la fecha del dia de hoy (actual)
+
+    fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
+        val formatter = SimpleDateFormat(format, locale)
+        return formatter.format(this)
+    }*/
+
 
 
 

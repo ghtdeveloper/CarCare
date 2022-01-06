@@ -47,8 +47,9 @@
                 android:id="@+id/txtFechaEntrada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:editable="false"
-                android:hint="Fecha de entrada" />
+                android:focusable="false"
+                android:cursorVisible="false"
+                android:hint="@string/text_fecha_entrada" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,7 +66,9 @@
                 android:id="@+id/txtFechaSalida"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Fecha de salida"
+                android:focusable="false"
+                android:cursorVisible="false"
+                android:hint="@string/text_fecha_salida_taller"
                 android:inputType="date"/>
 
         </com.google.android.material.textfield.TextInputLayout>
