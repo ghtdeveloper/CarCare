@@ -8,6 +8,7 @@
         <entry key="..\:/Users/GHTDEVELOPER/Documents/proyect_android/CarCare/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/GHTDEVELOPER/Documents/proyect_android/CarCare/app/src/main/res/layout/activity_splash_screen.xml" value="0.3625" />
         <entry key="..\:/Users/GHTDEVELOPER/Documents/proyect_android/CarCare/app/src/main/res/layout/dialog_registar_taller.xml" value="0.3625" />
+        <entry key="..\:/Users/GHTDEVELOPER/Documents/proyect_android/CarCare/app/src/main/res/layout/fragment_registrar_reparacion.xml" value="0.4" />
         <entry key="..\:/Users/GHTDEVELOPER/Documents/proyect_android/CarCare/app/src/main/res/layout/fragmento_hist_reparaciones.xml" value="0.3625" />
         <entry key="..\:/Users/GHTDEVELOPER/Documents/proyect_android/CarCare/app/src/main/res/layout/fragmento_talleres.xml" value="0.3625" />
         <entry key="..\:/Users/GHTDEVELOPER/Documents/proyect_android/CarCare/app/src/main/res/layout/fragmento_vehiculos.xml" value="0.3625" />
@@ -15,15 +16,6 @@
         <entry key="..\:/Users/GHTDEVELOPER/Documents/proyect_android/CarCare/app/src/main/res/layout/list_item_talleres.xml" value="0.3625" />
         <entry key="..\:/Users/GHTDEVELOPER/Documents/proyect_android/CarCare/app/src/main/res/layout/list_item_vehiculos.xml" value="0.3625" />
         <entry key="..\:/Users/GHTDEVELOPER/Documents/proyect_android/CarCare/app/src/main/res/menu/menu_bottom_navegation.xml" value="0.264" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.3203125" />
-        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.32760416666666664" />
-        <entry key="app/src/main/res/layout/fragment_registrar_reparacion.xml" value="0.1650943396226415" />
-        <entry key="app/src/main/res/layout/fragmento_hist_reparaciones.xml" value="0.32760416666666664" />
-        <entry key="app/src/main/res/layout/fragmento_talleres.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragmento_vehiculos.xml" value="0.32760416666666664" />
-        <entry key="app/src/main/res/layout/list_item_hist_reparaciones.xml" value="0.32760416666666664" />
-        <entry key="app/src/main/res/layout/list_item_vehiculos.xml" value="0.32760416666666664" />
-        <entry key="app/src/main/res/menu/menu_bottom_navegation.xml" value="0.32760416666666664" />
       </map>
     </option>
   </component>
@@ -32,5 +24,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.4" />
+      </ProjectState>
+    </option>
   </component>
 </project>
