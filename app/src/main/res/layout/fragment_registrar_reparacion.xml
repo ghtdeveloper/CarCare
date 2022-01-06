@@ -35,6 +35,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textinputLayoutFechaEntrada"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_marginStart="32dp"
@@ -43,13 +44,17 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtFechaEntrada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Fecha de entrada" />
+                android:focusable="false"
+                android:cursorVisible="false"
+                android:hint="@string/text_fecha_entrada" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textinputLayoutFechaSalida"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_marginStart="32dp"
@@ -58,9 +63,12 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtFechaSalida"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Fecha de salida"
+                android:focusable="false"
+                android:cursorVisible="false"
+                android:hint="@string/text_fecha_salida_taller"
                 android:inputType="date"/>
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -117,6 +125,40 @@
                 android:layout_height="wrap_content"
                 android:hint="Notas" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Agregar Imagenes (*)"
+                    android:textColor="@color/primaryTextColor"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="@dimen/dimg_img_attach"
+                    android:layout_height="@dimen/dimg_img_attach"
+                    app:layout_constraintEnd_toStartOf="@+id/img2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    app:srcCompat="@drawable/ic_add_image"></ImageView>
+
+                <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="@dimen/dimg_img_attach"
+                    android:layout_height="@dimen/dimg_img_attach"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintStart_toEndOf="@+id/img1"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    app:srcCompat="@drawable/ic_add_image"></ImageView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,10 +166,11 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:text="Guardar" />
+            android:layout_marginBottom="16dp"
+            android:text="Guardar"
+            android:textColor="@color/secondaryTextColor" />
 
 
     </LinearLayout>

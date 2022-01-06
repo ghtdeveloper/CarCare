@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import database.dao.TallerDao
 import database.dao.VehiculoDao
+import database.entities.Taller
 import database.entities.Vehiculo
 import java.security.AccessControlContext
 
@@ -13,6 +15,7 @@ abstract class AppDatabase : RoomDatabase() {
 
 
     abstract fun vehiculoDao(): VehiculoDao
+    abstract fun tallerDao() :  TallerDao
 
 
     companion object {
