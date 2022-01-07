@@ -4,13 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverter
 import database.dao.TallerDao
 import database.dao.VehiculoDao
 import database.entities.Taller
 import database.entities.Vehiculo
 import java.security.AccessControlContext
 
-@Database(entities = [Vehiculo::class], version = 1, exportSchema = false)
+@Database(entities = [Vehiculo::class,Taller::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
 
