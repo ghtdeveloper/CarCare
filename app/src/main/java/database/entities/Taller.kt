@@ -14,5 +14,7 @@ data class Taller(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val nombre : String,
-    val direccion : String
+    val direccion : String,
+    val latitud : String,
+    val longitud : String
 )

@@ -15,9 +15,9 @@ import database.entities.Taller
 interface TallerDao
 {
     @Query("Select * from taller")
-    suspend fun findAll():List<Taller>
+    fun findAll():List<Taller>
 
     @Insert
-    suspend fun save(taller: Taller)
+    fun save(taller: Taller)
 
 }//Fin del a interfaz TallerDao

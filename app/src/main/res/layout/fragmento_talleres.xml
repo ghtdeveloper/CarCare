@@ -14,69 +14,12 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-            <!--Data Dummy-->
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chip_group_talleres"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyleViewTalleres"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginEnd="0dp"
-                android:layout_marginBottom="0dp">
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipBtnTallerno_1"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:text="Taller Don Pedro"
-                    app:chipStartPadding="10dp" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipBtnTallerno_2"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:text="Taller Don Gonzalo"
-                    app:chipStartPadding="10dp" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipBtnTallerno_3"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:text="Suspensiones KYM"
-                    app:chipStartPadding="10dp" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipBtnTallerno_4"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:text="Refri Auto"
-                    app:chipStartPadding="10dp" />
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chipBtnTallerno_5"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="5dp"
-                    android:paddingEnd="5dp"
-                    android:text="Electro Auto"
-                    app:chipStartPadding="10dp" />
-
-            </com.google.android.material.chip.ChipGroup>
+                android:layout_height="wrap_content"/>
         </RelativeLayout>
     </HorizontalScrollView>
 
@@ -91,12 +34,12 @@
         app:layout_constraintVertical_bias="0.0">
 
         <fragment
-            android:id="@+id/map"
+            android:id="@+id/fragmap"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:context=".MapsActivity" />
+             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
