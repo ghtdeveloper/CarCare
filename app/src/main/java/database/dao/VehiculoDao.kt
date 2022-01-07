@@ -10,7 +10,7 @@ import database.entities.Vehiculo
 interface VehiculoDao {
 
     @Query("Select * from vehiculo")
-    fun findAll():List<Vehiculo>
+    fun findAll():MutableList<Vehiculo>
 
     @Query("Select * FROM vehiculo WHERE id = :idVehiculo")
     fun findByID(idVehiculo: Long): Vehiculo

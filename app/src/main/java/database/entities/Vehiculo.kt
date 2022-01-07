@@ -11,7 +11,7 @@ data class Vehiculo (
     val modelo: String,
     val anioFabricacion: String,
     val colorVehiculor: String,
-    val VIN: String,
-    val Alias: String
+    val chasis: String,
+    val alias: String?
 
     )
