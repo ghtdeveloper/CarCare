@@ -3,17 +3,13 @@ package es.usj.mastertsa.carcare.ui.talleres
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Room
 import application.App
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -22,21 +18,18 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.textfield.TextInputEditText
-import database.AppDatabase
 import database.entities.Taller
-import database.entities.Vehiculo
 import es.usj.mastertsa.carcare.R
 import es.usj.mastertsa.carcare.adaptador.AdaptadorTaller
 import es.usj.mastertsa.carcare.databinding.FragmentoTalleresBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-class FragmentoTalleres : Fragment(), OnMapReadyCallback
+class FragmentoTalleres : Fragment(), OnMapReadyCallback, AdaptadorTaller.onClickItemTaller
 {
     private lateinit var binding: FragmentoTalleresBinding
     //Objetcst
@@ -77,12 +70,33 @@ class FragmentoTalleres : Fragment(), OnMapReadyCallback
             withContext(Dispatchers.IO){
                 //LLamar a la base de datos desde una corutina
                 dataList.addAll(App.getDb().tallerDao().findAll())
+                if(App.getDb().tallerDao().findAll().isEmpty())
+                {
+
+                    Log.d("INFO","NO EXISTE DATOS EN LA ENTIDAD TALLERES")
+                    activity?.runOnUiThread(kotlinx.coroutines.Runnable {
+                        binding.horizontalScrollView.visibility = View.INVISIBLE
+                        binding.constraintLayoutMap.visibility = View.INVISIBLE
+                        binding.imageView.visibility = View.VISIBLE
+                        binding.textViewInfoTaller.visibility =View.VISIBLE
+                        binding.textViewInfoTaller.setText(R.string.text_info_taller_found)
+                    })
+                }
+                else
+                {
+                    Log.d("INFO","EXISTE DATOS EN LA ENTIDAD TALLERES")
+                    activity?.runOnUiThread(kotlinx.coroutines.Runnable {
+                        binding.horizontalScrollView.visibility = View.VISIBLE
+                        binding.constraintLayoutMap.visibility = View.VISIBLE
+                        adaptadorTaller = AdaptadorTaller(dataList)
+                        adaptadorTaller.setOnClick(this@FragmentoTalleres)
+                        binding.recyleViewTalleres.adapter = adaptadorTaller
+                        binding.textViewInfoTaller.visibility = View.INVISIBLE
+                    })
+                }
             }
         }
-        adaptadorTaller = AdaptadorTaller(dataList)
-        binding.recyleViewTalleres.adapter = adaptadorTaller
     }//Fin del metodo loadRecylerView
-
 
     private fun mostrarRegistrarTaller()
     {
@@ -98,9 +112,7 @@ class FragmentoTalleres : Fragment(), OnMapReadyCallback
         as TextInputEditText
         //Buttons
         dialogBuilder.setPositiveButton(R.string.text_registrar) { _, i ->
-
             //Validacciones previa (no campos vacios)
-
             if(textNombreTaller.text.isNullOrEmpty() || textDireccionTaller.text.isNullOrEmpty())
             {
                 Toast.makeText(requireContext(),R.string.text_No_Campos_vacios,Toast.LENGTH_LONG)
@@ -140,5 +152,9 @@ class FragmentoTalleres : Fragment(), OnMapReadyCallback
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(customLocation,20f))
     }//Fin del metodo onMapReady
 
+    override fun onClick(postion: Int)
+    {
+        onMapReady(mMap)
+    }//Fin del metodo onclick
 
 }//Fin de la class FragmentoTalleres

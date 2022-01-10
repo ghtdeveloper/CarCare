@@ -16,6 +16,15 @@ import es.usj.mastertsa.carcare.adaptadorVista.AdaptadorVistaTaller
 class AdaptadorTaller (private val dataSet: ArrayList<Taller>)  :
     RecyclerView.Adapter<AdaptadorVistaTaller>()
 {
+    //Interfaz
+    private lateinit var listener : onClickItemTaller
+
+
+    interface onClickItemTaller
+    {
+        fun onClick(postion : Int)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdaptadorVistaTaller {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_talleres,
        parent,false)
@@ -26,8 +35,21 @@ class AdaptadorTaller (private val dataSet: ArrayList<Taller>)  :
        val dataModel =  dataSet.get(position)
         //Data
         holder.chipTaller.text = dataModel.nombre
-    }
+        //OnClick
+        holder.chipTaller.setOnClickListener {
+            listener.onClick(position)
+        }
+
+    }//Fin del metodo onBindViewHolder
 
     override fun getItemCount() =dataSet.size
+
+    //Interfaz
+    fun setOnClick(onClick: onClickItemTaller)
+    {
+        listener = onClick
+    }//Fin de la funcion setOnClick
+
+
 
 }//Fin de la class AdaptadorTaller

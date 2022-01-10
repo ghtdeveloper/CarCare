@@ -32,6 +32,8 @@
     <string name="text_fecha_salida_taller">Fecha salida</string>
     <string name="text_direccion">Dirección</string>
     <string name="text_No_Campos_vacios">Debe de completar los campos vacios</string>
+    <string name="textimg">Imagen</string>
+    <string name="text_info_taller_found">No existe ningún taller registrado!</string>
 
 
 </resources>
