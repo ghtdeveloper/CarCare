@@ -20,4 +20,7 @@ interface TallerDao
     @Insert
     fun save(taller: Taller)
 
+    /*@Query ("select nombre from taller")
+    fun getNombreTaller() : List<Taller>*/
+
 }//Fin del a interfaz TallerDao

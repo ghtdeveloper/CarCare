@@ -34,6 +34,10 @@
     <string name="text_No_Campos_vacios">Debe de completar los campos vacios</string>
     <string name="textimg">Imagen</string>
     <string name="text_info_taller_found">No existe ningún taller registrado!</string>
+    <string name="text_info_reparacion_found">No existe ninguna reparación registraada!</string>
+    <string name="tipo_de_servicio">Tipo de Servicio</string>
+    <string name="notas">Notas</string>
+    <string name="taller">Taller</string>
 
 
 </resources>

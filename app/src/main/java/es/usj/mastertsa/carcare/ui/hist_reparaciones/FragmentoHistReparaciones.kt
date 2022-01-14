@@ -1,69 +1,106 @@
 package es.usj.mastertsa.carcare.ui.hist_reparaciones
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
+import android.widget.AdapterView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.textfield.TextInputLayout
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import application.App
+import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+import com.google.android.material.textfield.TextInputEditText
+import database.entities.Reparacion
+import database.entities.Taller
 import es.usj.mastertsa.carcare.R
+import es.usj.mastertsa.carcare.adaptador.AdaptadorReparacion
 import es.usj.mastertsa.carcare.databinding.FragmentoHistReparacionesBinding
 import es.usj.mastertsa.carcare.tools.DatePickerFragment
-import java.text.SimpleDateFormat
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentoHistReparaciones.newInstance] factory method to
- * create an instance of this fragment.
- */
-class FragmentoHistReparaciones : Fragment() {
+import kotlin.collections.ArrayList
 
 
+class FragmentoHistReparaciones : Fragment(), AdaptadorReparacion.onClickItemReparacion {
+
+    //Vista
     private lateinit var bindings : FragmentoHistReparacionesBinding
-
-    private lateinit var registrarReparacion: RegistrarReparacion
-    //FVariables
+    //Variables y objetos
     private lateinit var selectFechaEntrada : String
     private lateinit var selectFechaSalida : String
+    private lateinit var dataList : ArrayList<Reparacion>
+    private  lateinit var dataListTalleres : ArrayList<Taller>
+    private lateinit var dataListNombreTaller : ArrayList<String>
+    private lateinit var adaptadorReparacion: AdaptadorReparacion
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var  alertDialog : AlertDialog
+    private lateinit var valueSelectSpinnerTaller : String
+    private lateinit var valueSelectSpinnerVehiculo : String
+    private lateinit var spinnerTaller : SmartMaterialSpinner<String>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-
-    ): View? {
-        // Inflate the layout for this fragment
-
-//        floatingActionButton = view!!.findViewById(R.id.floatingActionButton)
-        bindings =  FragmentoHistReparacionesBinding.inflate(inflater, container,  false)
+        savedInstanceState: Bundle?): View? {
+        bindings =  FragmentoHistReparacionesBinding.inflate(inflater, container,
+            false)
+        linearLayoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,
+        false)
+        bindings.recyclerViewReparacion.layoutManager = linearLayoutManager
         return bindings.root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         bindings.floatingActionButton.setOnClickListener { loadRegistrarReparacion() }
-
         super.onViewCreated(view, savedInstanceState)
+    }//Fin del metodo onViewCreated
+
+    @Override
+    override fun onStart() {
+        super.onStart()
+        loadRecyclerView()
     }
+
+    private fun loadRecyclerView()
+    {
+        dataList = ArrayList()
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO)
+            {
+                //Call database
+                dataList.addAll(App.getDb().reparacionDao().findAll())
+                if(App.getDb().reparacionDao().findAll().isEmpty())
+                {
+                    Log.d("INFO","NO EXISTE DATOS EN LA ENTIDAD REPARACION")
+                    activity?.runOnUiThread(kotlinx.coroutines.Runnable {
+                        bindings.imageView.visibility = View.VISIBLE
+                        bindings.textViewReparacion.visibility =View.VISIBLE
+                        bindings.textViewReparacion.setText(R.string.text_info_taller_found)
+                    })
+
+                }else
+                {
+                    Log.d("INFO","EXISTE DATOS EN LA ENTIDAD REPARACION")
+                    activity?.runOnUiThread(kotlinx.coroutines.Runnable {
+                        bindings.imageView.visibility = View.INVISIBLE
+                        bindings.textViewReparacion.visibility =View.INVISIBLE
+                        //Cargar Adaptador
+                        adaptadorReparacion = AdaptadorReparacion(dataList)
+                        adaptadorReparacion.setOnClick(this@FragmentoHistReparaciones)
+                        bindings.recyclerViewReparacion.adapter = adaptadorReparacion
+                    })
+                }
+            }
+        }
+    }//Fin del metodo loadRecyclerView
 
     private fun loadRegistrarReparacion()
     {
@@ -75,7 +112,14 @@ class FragmentoHistReparaciones : Fragment() {
         val textFechaEntrada = dialogView.findViewById(R.id.txtFechaEntrada)
                 as EditText
         val texFechaSalida = dialogView.findViewById(R.id.txtFechaSalida) as EditText
-
+        val btnGuardar = dialogView.findViewById(R.id.saveButton) as Button
+        val textTipoServicio = dialogView.findViewById(R.id.textInputTipoServicio) as
+                TextInputEditText
+        val textNota = dialogView.findViewById(R.id.textInputNotas) as TextInputEditText
+        spinnerTaller = dialogView.findViewById(R.id.spinnerTalleres) as
+                SmartMaterialSpinner<String>
+        //Load Spinner
+        cargarSpinnerTaller()
         //Eventos
         textFechaEntrada.setOnClickListener {
             val newFragment = DatePickerFragment.newInstance { _, year, month, day ->
@@ -91,40 +135,88 @@ class FragmentoHistReparaciones : Fragment() {
             }
             newFragment.show(requireActivity().supportFragmentManager, "datePicker")
         }
-        val alertDialog = dialogBuilder.create()
+        btnGuardar.setOnClickListener {
+            //Validaciones de que todas las informaciones esten completadas
+            if(texFechaSalida.text.isNullOrEmpty() || textFechaEntrada.text.isNullOrEmpty() ||
+                textTipoServicio.text.isNullOrEmpty() || textNota.text.isNullOrEmpty())
+            {
+                Toast.makeText(requireContext(),R.string.text_No_Campos_vacios,Toast.LENGTH_LONG)
+                    .show()
+            }
+            else
+            {
+                //Se guarda la data
+                lifecycleScope.launch {
+                    withContext(Dispatchers.IO){
+                        //LLamar a la base de datos desde una corutina
+                        App.getDb().reparacionDao().save(Reparacion
+                            (fechaEntrada = selectFechaEntrada, fechaSalida = selectFechaSalida,
+                            notas = textNota.text.toString(),
+                            tipoServicio = textTipoServicio.text.toString(),
+                            talerNombre = valueSelectSpinnerTaller,
+                            vehiculoInfo = "Kia K5 Gris"))
+                    }
+                }
+                Toast.makeText(requireContext(),"Reparación registrada",Toast.LENGTH_LONG)
+                    .show()
+                //Se cierra el dialogo
+                alertDialog.dismiss()
+                //Se carga el recyclerView nuevamente
+                loadRecyclerView()
+            }
+        }
+        listenerSpinner()
+        alertDialog = dialogBuilder.create()
         alertDialog.setTitle("Registrar Reparación")
         alertDialog.show()
     }//Fin de la funcion loadRegistrarReparacion
 
 
-    /*
-        Se obtiene la fecha del dia de hoy (actual)
+    private fun listenerSpinner()
+    {
+        spinnerTaller.onItemSelectedListener = object :AdapterView.OnItemSelectedListener
+        {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long)
+            {
+                valueSelectSpinnerTaller = dataListNombreTaller[position]
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
+    }//Fin de la funcion listenerSpinner()
 
-    fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
-        val formatter = SimpleDateFormat(format, locale)
-        return formatter.format(this)
-    }*/
-
-
-
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentoHistReparaciones.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentoHistReparaciones().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun cargarSpinnerTaller()
+    {
+        dataListNombreTaller = ArrayList()
+        dataListTalleres = ArrayList()
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO)
+            {
+                dataListTalleres.addAll(App.getDb().tallerDao().findAll())
+                dataListTalleres.forEach {
+                   // Log.d("DATA TALLERES FILTRADO",it.nombre)
+                    dataListNombreTaller.add(it.nombre)
+                    spinnerTaller.item = dataListNombreTaller
                 }
             }
-    }
-}
+        }
+    }//Fin de la funcioncargarSpinnerVehiculo
+
+
+    override fun onClick(postion: Int)
+    {
+        val fm = activity?.supportFragmentManager
+        val fragmentoReparacion = RegistrarReparacion()
+        if (fm != null) {
+            val bundle = Bundle()
+            bundle.putString("notasGet",adaptadorReparacion.getNotas())
+            bundle.putString("fechaEntradaGet",adaptadorReparacion.getFechaEntrada())
+            bundle.putString("fechSalidaGet",adaptadorReparacion.getFechaSalida())
+            bundle.putString("tipoServicio",adaptadorReparacion.getTipoServicio())
+            bundle.putString("nombreTaller",adaptadorReparacion.getTallerNombre())
+            bundle.putLong("id",adaptadorReparacion.getID())
+            fragmentoReparacion.arguments = bundle
+            fragmentoReparacion.show(fm,"fragmentoReparacion")
+        }
+    }//Fin del metodo onClick
+
+}//Fin del FragmentoHistReparaciones

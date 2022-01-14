@@ -11,8 +11,6 @@ data class Reparacion (
     val fechaSalida: String,
     val notas: String?,
     val tipoServicio: String,
-    val tallerID: Long
-
-
-
+    val talerNombre: String,
+    val vehiculoInfo : String
 )

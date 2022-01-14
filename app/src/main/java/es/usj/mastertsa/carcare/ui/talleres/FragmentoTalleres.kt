@@ -154,7 +154,7 @@ class FragmentoTalleres : Fragment(), OnMapReadyCallback, AdaptadorTaller.onClic
 
     override fun onClick(postion: Int)
     {
-        onMapReady(mMap)
+        //onMapReady(mMap)
     }//Fin del metodo onclick
 
 }//Fin de la class FragmentoTalleres

@@ -1,7 +1,9 @@
 package es.usj.mastertsa.carcare.adaptador
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import database.entities.Taller
 import es.usj.mastertsa.carcare.R
@@ -18,7 +20,6 @@ class AdaptadorTaller (private val dataSet: ArrayList<Taller>)  :
 {
     //Interfaz
     private lateinit var listener : onClickItemTaller
-
 
     interface onClickItemTaller
     {
