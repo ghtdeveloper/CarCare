@@ -18,6 +18,7 @@ import com.chivorn.smartmaterialspinner.SmartMaterialSpinner
 import com.google.android.material.textfield.TextInputEditText
 import database.entities.Reparacion
 import database.entities.Taller
+import database.entities.Vehiculo
 import es.usj.mastertsa.carcare.R
 import es.usj.mastertsa.carcare.adaptador.AdaptadorReparacion
 import es.usj.mastertsa.carcare.databinding.FragmentoHistReparacionesBinding
@@ -39,12 +40,15 @@ class FragmentoHistReparaciones : Fragment(), AdaptadorReparacion.onClickItemRep
     private lateinit var dataList : ArrayList<Reparacion>
     private  lateinit var dataListTalleres : ArrayList<Taller>
     private lateinit var dataListNombreTaller : ArrayList<String>
+    private  lateinit var dataListVehiculos : ArrayList<Vehiculo>
+    private lateinit var dataListNombreVehiculos : ArrayList<String>
     private lateinit var adaptadorReparacion: AdaptadorReparacion
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var  alertDialog : AlertDialog
     private lateinit var valueSelectSpinnerTaller : String
     private lateinit var valueSelectSpinnerVehiculo : String
     private lateinit var spinnerTaller : SmartMaterialSpinner<String>
+    private lateinit var spinnerVehiculo : SmartMaterialSpinner<String>
 
 
     override fun onCreateView(
@@ -83,7 +87,7 @@ class FragmentoHistReparaciones : Fragment(), AdaptadorReparacion.onClickItemRep
                     activity?.runOnUiThread(kotlinx.coroutines.Runnable {
                         bindings.imageView.visibility = View.VISIBLE
                         bindings.textViewReparacion.visibility =View.VISIBLE
-                        bindings.textViewReparacion.setText(R.string.text_info_taller_found)
+                        bindings.textViewReparacion.setText(R.string.text_info_reparacion_found)
                     })
 
                 }else
@@ -118,8 +122,11 @@ class FragmentoHistReparaciones : Fragment(), AdaptadorReparacion.onClickItemRep
         val textNota = dialogView.findViewById(R.id.textInputNotas) as TextInputEditText
         spinnerTaller = dialogView.findViewById(R.id.spinnerTalleres) as
                 SmartMaterialSpinner<String>
+        spinnerVehiculo = dialogView.findViewById(R.id.spinerVehiculo) as
+                SmartMaterialSpinner<String>
         //Load Spinner
         cargarSpinnerTaller()
+        cargarSpinnerVehiculo()
         //Eventos
         textFechaEntrada.setOnClickListener {
             val newFragment = DatePickerFragment.newInstance { _, year, month, day ->
@@ -154,7 +161,7 @@ class FragmentoHistReparaciones : Fragment(), AdaptadorReparacion.onClickItemRep
                             notas = textNota.text.toString(),
                             tipoServicio = textTipoServicio.text.toString(),
                             talerNombre = valueSelectSpinnerTaller,
-                            vehiculoInfo = "Kia K5 Gris"))
+                            vehiculoInfo = valueSelectSpinnerVehiculo))
                     }
                 }
                 Toast.makeText(requireContext(),"Reparación registrada",Toast.LENGTH_LONG)
@@ -182,6 +189,15 @@ class FragmentoHistReparaciones : Fragment(), AdaptadorReparacion.onClickItemRep
             }
             override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
+
+        spinnerVehiculo.onItemSelectedListener = object :AdapterView.OnItemSelectedListener
+        {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long)
+            {
+                valueSelectSpinnerVehiculo = dataListNombreVehiculos[position]
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
     }//Fin de la funcion listenerSpinner()
 
     private fun cargarSpinnerTaller()
@@ -202,6 +218,23 @@ class FragmentoHistReparaciones : Fragment(), AdaptadorReparacion.onClickItemRep
     }//Fin de la funcioncargarSpinnerVehiculo
 
 
+    private fun cargarSpinnerVehiculo()
+    {
+        dataListNombreVehiculos = ArrayList()
+        dataListVehiculos = ArrayList()
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO)
+            {
+                dataListVehiculos.addAll(App.getDb().vehiculoDao().findAll())
+                dataListVehiculos.forEach {
+                    dataListNombreVehiculos.add(it.marca+"-"+it.modelo+"-"+it.colorVehiculor)
+                    spinnerVehiculo.item = dataListNombreVehiculos
+                }
+            }
+        }
+    }//Fin de la funcioncargarSpinnerVehiculo
+
+
     override fun onClick(postion: Int)
     {
         val fm = activity?.supportFragmentManager
@@ -213,6 +246,7 @@ class FragmentoHistReparaciones : Fragment(), AdaptadorReparacion.onClickItemRep
             bundle.putString("fechSalidaGet",adaptadorReparacion.getFechaSalida())
             bundle.putString("tipoServicio",adaptadorReparacion.getTipoServicio())
             bundle.putString("nombreTaller",adaptadorReparacion.getTallerNombre())
+            bundle.putString("infoVehiculo",adaptadorReparacion.getInfoVehiculo())
             bundle.putLong("id",adaptadorReparacion.getID())
             fragmentoReparacion.arguments = bundle
             fragmentoReparacion.show(fm,"fragmentoReparacion")

@@ -5,46 +5,31 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.lifecycleScope
+import application.App
 import database.entities.Vehiculo
 import es.usj.mastertsa.carcare.R
 import es.usj.mastertsa.carcare.databinding.FragmentRegistrarVehiculoBinding
 import es.usj.mastertsa.carcare.databinding.FragmentoVehiculosBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RegistrarVehiculo.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RegistrarVehiculo : DialogFragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
     private lateinit var bindings : FragmentRegistrarVehiculoBinding
-
-
-
     public var vehiculo: Vehiculo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-
         if  (vehiculo != null) {
 
             bindings.tvMarca.setText(vehiculo!!.marca)
             bindings.tvAlias.setText(vehiculo!!.alias)
-
-
         }
     }
 
@@ -54,20 +39,51 @@ class RegistrarVehiculo : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
-        bindings =  FragmentRegistrarVehiculoBinding.inflate(inflater, container,  false)
-
-
-
+            bindings =  FragmentRegistrarVehiculoBinding.inflate(inflater, container,  false)
             bindings.tvMarca.setText(arguments?.getString("marca"))
             bindings.tvAlias.setText(arguments?.getString("alias"))
             bindings.tvModelo.setText(arguments?.getString("modelo"))
             bindings.tvAnioFabricacion.setText(arguments?.getString("anioFabricacion"))
             bindings.tvVIN.setText(arguments?.getString("chasis"))
             bindings.tvColor.setText(arguments?.getString("color"))
-
+            bindings.saveButton.setOnClickListener {
+                registrarVehiculo()
+            }
         return bindings.root
     }
+
+    private fun registrarVehiculo()
+    {
+        if(bindings.tvMarca.text.isNullOrEmpty() ||  bindings.tvModelo.text.isNullOrEmpty()
+            ||bindings.tvAnioFabricacion.text.isNullOrEmpty() || bindings.tvColor.text.isNullOrEmpty()
+            || bindings.tvVIN.text.isNullOrEmpty() || bindings.tvAlias.text.isNullOrEmpty())
+        {
+            //Toast.makeText(context,"Debe completar los campos",Toast.LENGTH_LONG).show()
+
+
+        }else
+        {
+            //Se registra el vehiculo
+            lifecycleScope.launch {
+                withContext(Dispatchers.IO)
+                {
+                    App.getDb().vehiculoDao().save(Vehiculo( marca = bindings.tvMarca.text.toString()
+                    ,modelo =bindings.tvModelo.text.toString(), anioFabricacion =
+                        bindings.tvAnioFabricacion.text.toString()
+                    ,colorVehiculor = bindings.tvColor.text.toString(),
+                    chasis = bindings.tvVIN.text.toString(),alias = bindings.tvAlias.text.toString()))
+                }
+                Toast.makeText(requireContext(),"Vehículo registrado exitosmente!",
+                    Toast.LENGTH_LONG).show()
+                //Se debe cerrar el dialogo y mostrar el recyclerview
+                 dismiss()
+                val fragmentoVehiculo = FragmentoVehiculos()
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.fragment_container_view,fragmentoVehiculo,
+                        "vehiculo_principal")?.commit()
+            }
+        }
+    }//Fin del metodo registrarVehiculo
 
     override fun onResume() {
         super.onResume()
@@ -79,23 +95,5 @@ class RegistrarVehiculo : DialogFragment() {
         )
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RegistrarVehiculo.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RegistrarVehiculo().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-}
+
+}//Fin de la clase RegistrarVehiculo

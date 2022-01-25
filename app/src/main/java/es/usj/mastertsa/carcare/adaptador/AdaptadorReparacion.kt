@@ -31,6 +31,7 @@ class AdaptadorReparacion(private val dataSet: ArrayList<Reparacion>) :
    private lateinit var fechaSalida : String
    private lateinit var tipoServicio : String
    private lateinit var tallerNombre : String
+   private lateinit var infoVehiculo : String
    private  var id : Long = 0
 
     interface onClickItemReparacion
@@ -59,6 +60,7 @@ class AdaptadorReparacion(private val dataSet: ArrayList<Reparacion>) :
             fechaSalida = dataSet[position].fechaSalida
             tipoServicio = dataSet[position].tipoServicio
             tallerNombre = dataSet[position].talerNombre
+            infoVehiculo = dataSet[position].vehiculoInfo
             id = dataSet[position].id
            listener.onClick(position)
         }
@@ -102,6 +104,11 @@ class AdaptadorReparacion(private val dataSet: ArrayList<Reparacion>) :
     fun getID() : Long
     {
         return  id
+    }
+
+    fun getInfoVehiculo() : String
+    {
+        return infoVehiculo
     }
 
 

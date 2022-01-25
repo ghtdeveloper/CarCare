@@ -115,7 +115,8 @@ tools:context=".ui.vehiculos.RegistrarVehiculo">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Guardar" />
+        android:text="Guardar"
+        android:textColor="@color/secondaryTextColor" />
 
 
 </LinearLayout>

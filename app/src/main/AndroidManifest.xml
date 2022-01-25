@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.usj.mastertsa.carcare">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
+
         android:name="application.App"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"

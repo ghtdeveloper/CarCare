@@ -1,57 +1,38 @@
 package es.usj.mastertsa.carcare.ui.vehiculos
 
-import android.app.AlertDialog
 import android.os.Bundle
-import android.os.Message
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import application.App
 import database.entities.Vehiculo
 import es.usj.mastertsa.carcare.R
+import es.usj.mastertsa.carcare.adaptador.AdaptadorReparacion
 import es.usj.mastertsa.carcare.databinding.FragmentoVehiculosBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentoVehiculos.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentoVehiculos : Fragment(),VehiculosAdapter.onClickItemVehiculo {
 
     private lateinit var bindings : FragmentoVehiculosBinding
     private lateinit var registrarVehiculo: RegistrarVehiculo
     private lateinit var adapter: VehiculosAdapter
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
-//    private lateinit var vehiculosList: MutableList<Vehiculo>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
-//        recyclerView.findViewById<RecyclerView>(R.id.rvVehiculo)
         arguments?.let {
 
         }
-
         lifecycleScope.launch {
             withContext(Dispatchers.IO){
-                //LLamar a la base de datos desde una corutina
-//                App.getDb().vehiculoDao().save(Vehiculo(marca = "Hyundai", modelo = "Sonata", anioFabricacion = "2014", colorVehiculor = "gris", chasis = "1829384904JJ4O4J", alias = "LA ESTUFA"))
             }
         }
     }
@@ -60,33 +41,38 @@ class FragmentoVehiculos : Fragment(),VehiculosAdapter.onClickItemVehiculo {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         bindings =  FragmentoVehiculosBinding.inflate(inflater, container,  false)
+        linearLayoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,
+            false)
+        bindings.rvVehiculo.layoutManager = linearLayoutManager
 
         lifecycleScope.launch {
-
             val vehiculosList = withContext(Dispatchers.IO) {App.getDb().vehiculoDao().findAll()}
-//            withContext(Dispatchers.IO){
-//
-//                //LLamar a la base de datos desde una corutina
-//                val vehiculosList = App.getDb().vehiculoDao().findAll()
-//
-//
-//            }
-            initRecycler(vehiculosList)
-
+            //Verificar si hay data antes de cargar el recyclerview
+            if(vehiculosList.isNullOrEmpty())
+            {
+                Log.d("NO DATA","No existe ningun vehiculo registrado")
+                activity?.runOnUiThread(kotlinx.coroutines.Runnable {
+                    bindings.imageView.visibility = View.VISIBLE
+                    bindings.textViewReparacion.visibility =View.VISIBLE
+                    bindings.textViewReparacion.setText(R.string.text_info_vehiculo_found)
+                })
+            }else
+            {
+                Log.d("DATA","Existe vehiculos registrados")
+                activity?.runOnUiThread(kotlinx.coroutines.Runnable {
+                    bindings.imageView.visibility = View.INVISIBLE
+                    bindings.textViewReparacion.visibility =View.INVISIBLE
+                    //Cargar Adaptador
+                    initRecycler(vehiculosList)
+                })
+            }
         }
-
-//        var vehiculo = Vehiculo(marca = "Hyundai", modelo = "Sonata", anioFabricacion = "2014", colorVehiculor = "gris", chasis = "1829384904JJ4O4J", alias = "LA ESTUFA")
-
-//        vehiculosList = mutableListOf(vehiculo)
-//        vehiculosList.add(vehiculo)
-//        initRecycler(vehiculosList)
-        return bindings.root    }
+        return bindings.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         bindings.floatingActionButton.setOnClickListener {   loadRegistrarVehiculo()}
-
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -99,51 +85,16 @@ class FragmentoVehiculos : Fragment(),VehiculosAdapter.onClickItemVehiculo {
 
     }
 
-
     private fun loadRegistrarVehiculo()
     {
-
         val fm = activity?.supportFragmentManager
         val fragmentoVehiculo = RegistrarVehiculo()
         if (fm != null) {
             fragmentoVehiculo.show(fm,"fragmentoVehiculo")
         }
-
     }//Fin de la funcion loadRegistrarReparacion
 
-    private fun loadData() {
-//TODO Load data
-        val arrayAdapter:ArrayAdapter<*>
-
-
-    }
-
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentoVehiculos.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentoVehiculos().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-
-
-    }
-
     override fun onClick() {
-
-//        Toast.makeText(context,"Aqui estamos",Toast.LENGTH_LONG).show()
         val fm = activity?.supportFragmentManager
         val fragmentoVehiculo = RegistrarVehiculo()
         if (fm != null) {
@@ -159,6 +110,5 @@ class FragmentoVehiculos : Fragment(),VehiculosAdapter.onClickItemVehiculo {
             fragmentoVehiculo.show(fm,"fragmentoVehiculo")
         }
     }
-
 
 }
