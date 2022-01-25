@@ -1,24 +1,35 @@
 package es.usj.mastertsa.carcare.ui.vehiculos
 
-import android.app.Activity
-import android.app.AlertDialog
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import database.entities.Vehiculo
 import es.usj.mastertsa.carcare.R
-import es.usj.mastertsa.carcare.ui.principal.MainActivity
-import org.w3c.dom.Text
 
-class VehiculosAdapter(val vehiculos:List<Vehiculo>):RecyclerView.Adapter<VehiculosAdapter.VehiculoHolder>() {
+class VehiculosAdapter(val vehiculos: List<Vehiculo>, private val context: Context):RecyclerView.Adapter<VehiculosAdapter.VehiculoHolder>() {
 
-//    lateinit var vehiculoInfo : TextView
+    //    lateinit var vehiculoInfo : TextView
 //    lateinit var vehiculoChasis : TextView
 //    lateinit var VehiculoTipo : TextView
 
+    private lateinit var listener: VehiculosAdapter.onClickItemVehiculo
+
+     lateinit var marca : String
+     lateinit var modelo : String
+     lateinit var anioFabricacion : String
+     lateinit var color : String
+     lateinit var chasis : String
+     lateinit var alias : String
+      var id : Long = 0
+
+    interface onClickItemVehiculo
+    {
+        fun onClick()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VehiculoHolder {
 //        vehiculoInfo = view
 //
@@ -32,32 +43,42 @@ class VehiculosAdapter(val vehiculos:List<Vehiculo>):RecyclerView.Adapter<Vehicu
     }
 
     override fun onBindViewHolder(holder: VehiculoHolder, position: Int) {
+        val vehiculoModel = vehiculos.get(position)
+
         holder.render(vehiculos[position])
+
     }
 
     override fun getItemCount(): Int = vehiculos.size
 
-    class VehiculoHolder(val view: View):RecyclerView.ViewHolder(view){
+    inner class VehiculoHolder(val view: View):RecyclerView.ViewHolder(view){
 
         fun render(vehiculo: Vehiculo){
 
+//            val context : Context = Activity()
             view.findViewById<TextView>(R.id.txtViewChasis).text = vehiculo.chasis
             view.findViewById<TextView>(R.id.txtViewTipoVehiculo).text = vehiculo.colorVehiculor
             view.findViewById<TextView>(R.id.txtViewInfoVehiculo).text = if (!vehiculo.alias.isNullOrBlank())  vehiculo.alias else  vehiculo.marca + " " +vehiculo.modelo
-
+//            view.findViewById<>()
             view.setOnClickListener {
-                val dialogBuilder = AlertDialog.Builder(view.context)
 
-                val mView: View =
-                    LayoutInflater.from(view.getRootView().getContext()).inflate(R.layout.fragment_registrar_vehiculo, null)
+                marca = vehiculo.marca
+                modelo = vehiculo.modelo
+                anioFabricacion = vehiculo.anioFabricacion
+                color = vehiculo.colorVehiculor
+                chasis = vehiculo.chasis
+                alias = if (!vehiculo.alias.isNullOrBlank())  vehiculo.alias else " "
+                id = vehiculo.id
+                listener.onClick()
 
-//                val dialogView =  mView.inflate(R.layout.fragment_registrar_vehiculo,null)
-                dialogBuilder.setView(mView)
-
-                val alertDialog = dialogBuilder.create()
-                alertDialog.setTitle("Editar Vehiculo")
-                alertDialog.show() }
-
+            }
         }
     }
+
+    fun setOnClick(onClick: VehiculosAdapter.onClickItemVehiculo)
+    {
+        listener = onClick
+    }//Fin de la funcion setOnClick
+
+    //fun
 }

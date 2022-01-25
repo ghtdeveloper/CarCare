@@ -23,6 +23,7 @@ tools:context=".ui.vehiculos.RegistrarVehiculo">
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tvMarca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Marca" />
@@ -37,6 +38,7 @@ tools:context=".ui.vehiculos.RegistrarVehiculo">
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tvModelo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Modelo" />
@@ -50,11 +52,11 @@ tools:context=".ui.vehiculos.RegistrarVehiculo">
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tvAnioFabricacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Año de fabricación"
-            android:inputType="date"
-            />
+            android:inputType="date" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -65,6 +67,7 @@ tools:context=".ui.vehiculos.RegistrarVehiculo">
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tvColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Color" />
@@ -80,10 +83,11 @@ tools:context=".ui.vehiculos.RegistrarVehiculo">
         app:counterMaxLength="17">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tvVIN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="VIN"
-            android:inputType="textCapCharacters"/>
+            android:inputType="textCapCharacters" />
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -98,6 +102,7 @@ tools:context=".ui.vehiculos.RegistrarVehiculo">
         >
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tvAlias"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Alias" />
@@ -106,7 +111,7 @@ tools:context=".ui.vehiculos.RegistrarVehiculo">
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

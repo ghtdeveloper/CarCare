@@ -11,23 +11,26 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvVehiculo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/primaryColor"
         android:clickable="false"
+        android:contentDescription="TODO"
         android:paddingBottom="?attr/actionBarSize"
         android:src="@drawable/ic_baseline_add_26"
         app:backgroundTint="@color/primaryColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@android:color/white"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:contentDescription="TODO" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

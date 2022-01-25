@@ -49,6 +49,16 @@ class RegistrarReparacion : DialogFragment()
         binding.saveButton.setOnClickListener { updateData() }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+//Dimensionar fragment
+        var dialogWidth = dialog?.window?.attributes?.width ?: 1000
+        dialog?.window?.setLayout(
+            resources.displayMetrics.widthPixels, dialogWidth
+        )
+    }
+
     private fun updateData()
     {
         lifecycleScope.launch {

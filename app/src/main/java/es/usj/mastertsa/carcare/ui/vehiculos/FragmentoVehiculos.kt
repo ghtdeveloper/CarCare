@@ -2,15 +2,15 @@ package es.usj.mastertsa.carcare.ui.vehiculos
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Message
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import application.App
 import database.entities.Vehiculo
 import es.usj.mastertsa.carcare.R
@@ -31,10 +31,11 @@ private const val ARG_PARAM2 = "param2"
  * Use the [FragmentoVehiculos.newInstance] factory method to
  * create an instance of this fragment.
  */
-class FragmentoVehiculos : Fragment() {
+class FragmentoVehiculos : Fragment(),VehiculosAdapter.onClickItemVehiculo {
 
     private lateinit var bindings : FragmentoVehiculosBinding
     private lateinit var registrarVehiculo: RegistrarVehiculo
+    private lateinit var adapter: VehiculosAdapter
 
 //    private lateinit var vehiculosList: MutableList<Vehiculo>
 
@@ -50,7 +51,7 @@ class FragmentoVehiculos : Fragment() {
         lifecycleScope.launch {
             withContext(Dispatchers.IO){
                 //LLamar a la base de datos desde una corutina
-                App.getDb().vehiculoDao().save(Vehiculo(marca = "Hyundai", modelo = "Sonata", anioFabricacion = "2014", colorVehiculor = "gris", chasis = "1829384904JJ4O4J", alias = "LA ESTUFA"))
+//                App.getDb().vehiculoDao().save(Vehiculo(marca = "Hyundai", modelo = "Sonata", anioFabricacion = "2014", colorVehiculor = "gris", chasis = "1829384904JJ4O4J", alias = "LA ESTUFA"))
             }
         }
     }
@@ -76,7 +77,7 @@ class FragmentoVehiculos : Fragment() {
 
         }
 
-        var vehiculo = Vehiculo(marca = "Hyundai", modelo = "Sonata", anioFabricacion = "2014", colorVehiculor = "gris", chasis = "1829384904JJ4O4J", alias = "LA ESTUFA")
+//        var vehiculo = Vehiculo(marca = "Hyundai", modelo = "Sonata", anioFabricacion = "2014", colorVehiculor = "gris", chasis = "1829384904JJ4O4J", alias = "LA ESTUFA")
 
 //        vehiculosList = mutableListOf(vehiculo)
 //        vehiculosList.add(vehiculo)
@@ -92,7 +93,8 @@ class FragmentoVehiculos : Fragment() {
     fun initRecycler(list :MutableList<Vehiculo>) {
 
         bindings.rvVehiculo.layoutManager = LinearLayoutManager(activity)
-        val adapter = VehiculosAdapter(list)
+        adapter = context?.let { VehiculosAdapter(list, it) }!!
+        adapter.setOnClick(this)
         bindings.rvVehiculo.adapter = adapter
 
     }
@@ -100,28 +102,19 @@ class FragmentoVehiculos : Fragment() {
 
     private fun loadRegistrarVehiculo()
     {
-//        registrarVehiculo = RegistrarVehiculo()
-//        activity?.supportFragmentManager?.beginTransaction()
-//            ?.add(R.id.fragment_container_view,registrarVehiculo)?.commit()
 
-        val dialogBuilder = AlertDialog.Builder(requireContext())
-        val inflater = this.layoutInflater
-        val dialogView = inflater.inflate(R.layout.fragment_registrar_vehiculo,null)
-        dialogBuilder.setView(dialogView)
-
-        val alertDialog = dialogBuilder.create()
-        alertDialog.setTitle("Añadir Vehiculo")
-        alertDialog.show()
+        val fm = activity?.supportFragmentManager
+        val fragmentoVehiculo = RegistrarVehiculo()
+        if (fm != null) {
+            fragmentoVehiculo.show(fm,"fragmentoVehiculo")
+        }
 
     }//Fin de la funcion loadRegistrarReparacion
 
     private fun loadData() {
-
+//TODO Load data
         val arrayAdapter:ArrayAdapter<*>
 
-        val vehiculosArray = mutableListOf("Carlitos", "Manolo", "hasinto")
-
-//        arrayAdapter = ArrayAdapter(this,)
 
     }
 
@@ -146,6 +139,25 @@ class FragmentoVehiculos : Fragment() {
             }
 
 
+    }
+
+    override fun onClick() {
+
+//        Toast.makeText(context,"Aqui estamos",Toast.LENGTH_LONG).show()
+        val fm = activity?.supportFragmentManager
+        val fragmentoVehiculo = RegistrarVehiculo()
+        if (fm != null) {
+            val bundle = Bundle()
+            bundle.putString("marca",adapter.marca)
+            bundle.putString("modelo",adapter.modelo)
+            bundle.putString("anioFabricacion",adapter.anioFabricacion)
+            bundle.putString("color",adapter.color)
+            bundle.putString("chasis",adapter.chasis)
+            bundle.putString("alias",adapter.alias)
+            bundle.putLong("id",adapter.id)
+            fragmentoVehiculo.arguments = bundle
+            fragmentoVehiculo.show(fm,"fragmentoVehiculo")
+        }
     }
 
 
