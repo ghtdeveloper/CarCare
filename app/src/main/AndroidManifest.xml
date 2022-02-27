@@ -8,7 +8,7 @@
 
     <application
 
-        android:name="application.App"
+        android:name=".app.MainApp"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarCare">
         <activity
-            android:name=".ui.splash.SplashScreen"
+            android:name="es.usj.mastertsa.carcare.view.ui.splash.SplashScreen"
             android:theme="@style/materialDesignbyCustom"
             android:exported="true">
             <intent-filter>
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.principal.MainActivity"
+            android:name="es.usj.mastertsa.carcare.view.ui.principal.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

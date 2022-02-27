@@ -1,13 +1,11 @@
 package es.usj.mastertsa.carcare.adaptador
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import database.entities.Taller
+import es.usj.mastertsa.carcare.domain.Taller
 import es.usj.mastertsa.carcare.R
-import es.usj.mastertsa.carcare.adaptadorVista.AdaptadorVistaTaller
+import es.usj.mastertsa.carcare.view.ui.adaptersui.AdaptadorVistaTaller
 
 
 /**

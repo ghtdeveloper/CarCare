@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.principal.MainActivity">
+    tools:context=".view.ui.principal.MainActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavegation"
@@ -19,7 +19,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"
-        android:name="es.usj.mastertsa.carcare.ui.hist_reparaciones.FragmentoHistReparaciones"
+        android:name="es.usj.mastertsa.carcare.view.ui.hist_reparaciones.FragmentoHistReparaciones"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:tag="my_tag"

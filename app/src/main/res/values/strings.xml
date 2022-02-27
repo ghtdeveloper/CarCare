@@ -39,6 +39,26 @@
     <string name="tipo_de_servicio">Tipo de Servicio</string>
     <string name="notas">Notas</string>
     <string name="taller">Taller</string>
+    <!--List Item Vehiculo-->
+    <string name="textAgregadoDesde">Registrado :</string>
+    <string name="textFechaExample">10-Enero-2019</string>
+    <string name="textVIN">VIN:</string>
+    <string name="textMarca">Marca:</string>
+    <string name="textModelo">Modelo:</string>
+    <string name="textAlias">Alias:</string>
+    <string name="textAño">Año:</string>
+    <string name="textValuexx">xxxxxxx</string>
+    <string name="textEliminar">Eliminar</string>
+    <string name="textTituloDeleteVehiculo">¿Deseas eliminar este vehículo ?</string>
+    <string name="textEliminarDialogo">Eliminar</string>
+    <string name="textMessageVehiculoEliminado">Vehículo eliminado exitosamente!</string>
+    <string name="textEditar">Editar</string>
+    <!--List Item Reparacion-->
+    <string name="textInfoVehiculo">Información del vehículo:</string>
+    <string name="textFechaEntrada">Fecha Entrada/Registro:</string>
+    <string name="textTipoReparacion">Tipo de Reparación:</string>
+    <string name="textTituloDeleteReparacion">¿Deseas eliminar esta reparación?</string>
+    <string name="textMessageReparacionEliminado">Reparación eliminado exitosamente!</string>
 
 
 </resources>

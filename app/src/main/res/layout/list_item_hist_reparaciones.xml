@@ -1,76 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/secondaryTextColor">
-
-    <androidx.cardview.widget.CardView
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/cardviewReparacion"
-        android:layout_width="match_parent"
+         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/secondaryTextColor"
-        android:elevation="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:cardCornerRadius="10dp"
+        app:cardElevation="6dp"
+        app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent">
 
-            <TextView
-                android:id="@+id/txtViewReparacion"
+            <ImageView
+                android:id="@+id/imageViewVehiculo"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/document" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fltBtnEliminarReparacion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/text_reparacion_dummy"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txtViewTallerReparacion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
-                android:text="@string/tex_taller_reparacion_dummy"
-                android:textColor="@color/secondaryLightColor"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtViewReparacion" />
-
-            <TextView
-                android:id="@+id/txtViewFechaSalida"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/text_fecha_reparacion_dummy"
-                android:textColor="@color/secondaryLightColor"
-                android:textSize="14sp"
-                android:textStyle="bold"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/smsp_dismiss_color"
+                android:clickable="false"
+                android:contentDescription="@string/app_name"
+                app:fabSize="mini"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_delete_24"
+                app:tint="@color/smsp_white_color" />
 
-            <View
-                android:id="@+id/divider24"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
+            <RelativeLayout
+                android:id="@+id/relativeDatosVehiculo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@android:color/darker_gray"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtViewTallerReparacion" />
+                app:layout_constraintTop_toBottomOf="@+id/imageViewVehiculo">
+
+                <TextView
+                    android:id="@+id/textViewTituloVIN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/textInfoVehiculo"
+                    android:textColor="@color/primaryTextColor"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewValueInfoVehiculo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:layout_toEndOf="@+id/textViewTituloVIN"
+                    android:text="@string/textValuexx" />
+
+
+                <TextView
+                    android:id="@+id/textViewMarca"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textViewTituloVIN"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/textFechaEntrada"
+                    android:textColor="@color/primaryTextColor"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewValueFechaEntrada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textViewTituloVIN"
+                    android:layout_toEndOf="@+id/textViewMarca"
+                    android:text="@string/textValuexx" />
+
+
+                <TextView
+                    android:id="@+id/textViewModelo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textViewMarca"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/textTipoReparacion"
+                    android:textColor="@color/primaryTextColor"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewValueNotaReparacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textViewValueFechaEntrada"
+                    android:layout_toEndOf="@+id/textViewModelo"
+                    android:text="@string/textValuexx" />
+
+
+            </RelativeLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>

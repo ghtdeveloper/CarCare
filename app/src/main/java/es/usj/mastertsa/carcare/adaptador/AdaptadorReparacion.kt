@@ -1,17 +1,11 @@
 package es.usj.mastertsa.carcare.adaptador
 
-import android.app.Activity
-import android.content.ContentValues.TAG
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
-import database.entities.Reparacion
+import es.usj.mastertsa.carcare.domain.Reparacion
 import es.usj.mastertsa.carcare.R
-import es.usj.mastertsa.carcare.adaptadorVista.AdaptadorVistaReparacion
-import es.usj.mastertsa.carcare.ui.hist_reparaciones.RegistrarReparacion
+import es.usj.mastertsa.carcare.view.ui.adaptersui.AdaptadorVistaReparacion
 
 
 /**
@@ -24,6 +18,7 @@ class AdaptadorReparacion(private val dataSet: ArrayList<Reparacion>) :
 {
     //interfaz
    private lateinit var listener: onClickItemReparacion
+   private lateinit var listenerDelete: onClickDeleteReparacion
    private  var dataSelect : ArrayList<String> = ArrayList()
    //Variables
    private lateinit var notas :String
@@ -39,21 +34,25 @@ class AdaptadorReparacion(private val dataSet: ArrayList<Reparacion>) :
         fun onClick(postion : Int)
     }
 
+    interface onClickDeleteReparacion
+    {
+        fun onClickDelet()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdaptadorVistaReparacion
     {
        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_hist_reparaciones
        ,parent,false)
         return AdaptadorVistaReparacion(view)
-    }//Fin del metodo onCreateViewHolder
+    }
 
 
     override fun onBindViewHolder(holder: AdaptadorVistaReparacion, position: Int)
     {
-       val dataModal = dataSet.get(position)
-        //Asignacion de informaciona vistas
-        holder.txtViewReparacion.text = dataModal.notas
-        holder.txtViewTallerReparacion.text = dataModal.talerNombre
-        holder.textViewFechaSalida.text = dataModal.fechaSalida
+        val dataModal = dataSet.get(position)
+        holder.textViewValueInfoVehiculo.text = dataModal.vehiculoInfo
+        holder.textViewValueFechaEntrada.text = dataModal.fechaEntrada
+        holder.textViewValueNotaReparacion.text = dataModal.tipoServicio
         holder.cardviewHistReparacion.setOnClickListener {
             notas = dataSet[position].notas.toString()
             fechaEntrada = dataSet[position].fechaEntrada
@@ -64,18 +63,23 @@ class AdaptadorReparacion(private val dataSet: ArrayList<Reparacion>) :
             id = dataSet[position].id
            listener.onClick(position)
         }
-
-    }//Fin del metodo onBindViewHolder
+        holder.fltBtnEliminarReparacion.setOnClickListener {
+            id = dataSet[position].id
+            listenerDelete.onClickDelet()
+        }
+    }
 
     override fun getItemCount() =dataSet.size
 
-    //Interfaz
     fun setOnClick(onClick: onClickItemReparacion)
     {
         listener = onClick
-    }//Fin de la funcion setOnClick
+    }
 
-    //fun
+    fun setOnClickDelete(onClick:onClickDeleteReparacion)
+    {
+        listenerDelete = onClick
+    }
 
     fun getNotas() : String
     {
@@ -111,5 +115,4 @@ class AdaptadorReparacion(private val dataSet: ArrayList<Reparacion>) :
         return infoVehiculo
     }
 
-
-}//Fin de la class AdaptadorReparacion
+}
