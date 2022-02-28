@@ -15,6 +15,7 @@ tools:context=".view.ui.vehiculos.RegistrarVehiculo">
     android:padding="32dp">
 
 
+    <!--Marca-->
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -27,7 +28,6 @@ tools:context=".view.ui.vehiculos.RegistrarVehiculo">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Marca" />
-
 
     </com.google.android.material.textfield.TextInputLayout>
 

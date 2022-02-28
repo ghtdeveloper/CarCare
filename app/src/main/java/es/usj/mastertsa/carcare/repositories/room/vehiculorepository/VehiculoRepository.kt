@@ -1,7 +1,8 @@
-package es.usj.mastertsa.carcare.repositories.vehiculorepository
+package es.usj.mastertsa.carcare.repositories.room.vehiculorepository
 
+import com.google.firebase.firestore.CollectionReference
 import es.usj.mastertsa.carcare.domain.Vehiculo
-import es.usj.mastertsa.carcare.repositories.dao.VehiculoDao
+import es.usj.mastertsa.carcare.repositories.room.dao.VehiculoDao
 
 
 /**
@@ -33,5 +34,7 @@ class VehiculoRepository (private val vehiculoDao: VehiculoDao) : IVehiculoRepos
     override fun delete(idVehiculo: Long) {
         vehiculoDao.delete(idVehiculo)
     }
+
+
 
 }

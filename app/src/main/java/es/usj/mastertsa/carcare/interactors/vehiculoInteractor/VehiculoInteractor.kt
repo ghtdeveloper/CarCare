@@ -1,7 +1,7 @@
 package es.usj.mastertsa.carcare.interactors.vehiculoInteractor
 
 import es.usj.mastertsa.carcare.domain.Vehiculo
-import es.usj.mastertsa.carcare.repositories.vehiculorepository.IVehiculoRepository
+import es.usj.mastertsa.carcare.repositories.room.vehiculorepository.IVehiculoRepository
 
 
 /**
@@ -31,5 +31,6 @@ class VehiculoInteractor (private val iVehiculoRepository: IVehiculoRepository) 
     override fun delete(idVehiculo: Long) {
        iVehiculoRepository.delete(idVehiculo)
     }
+
 
 }

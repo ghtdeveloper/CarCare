@@ -1,7 +1,7 @@
 package es.usj.mastertsa.carcare.interactors.tallerinteractor
 
 import es.usj.mastertsa.carcare.domain.Taller
-import es.usj.mastertsa.carcare.repositories.tallerrepository.ITallerRepository
+import es.usj.mastertsa.carcare.repositories.room.tallerrepository.ITallerRepository
 
 
 /**

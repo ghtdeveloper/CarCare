@@ -1,5 +1,6 @@
-package es.usj.mastertsa.carcare.repositories.vehiculorepository
+package es.usj.mastertsa.carcare.repositories.room.vehiculorepository
 
+import com.google.firebase.firestore.CollectionReference
 import es.usj.mastertsa.carcare.domain.Vehiculo
 
 

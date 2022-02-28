@@ -10,16 +10,15 @@ import es.usj.mastertsa.carcare.interactors.vehiculoInteractor.VehiculoInteracto
 import es.usj.mastertsa.carcare.presenter.HistRepActivityPresenter
 import es.usj.mastertsa.carcare.presenter.TalleresActivityPresenter
 import es.usj.mastertsa.carcare.presenter.VehiculosActivityPresenter
-import es.usj.mastertsa.carcare.repositories.database.AppDatabase
-import es.usj.mastertsa.carcare.repositories.reparacionrepository.IReparacionRepository
-import es.usj.mastertsa.carcare.repositories.reparacionrepository.ReparacionRepository
-import es.usj.mastertsa.carcare.repositories.tallerrepository.ITallerRepository
-import es.usj.mastertsa.carcare.repositories.tallerrepository.TallerRepository
-import es.usj.mastertsa.carcare.repositories.vehiculorepository.IVehiculoRepository
-import es.usj.mastertsa.carcare.repositories.vehiculorepository.VehiculoRepository
+import es.usj.mastertsa.carcare.repositories.room.database.AppDatabase
+import es.usj.mastertsa.carcare.repositories.room.reparacionrepository.IReparacionRepository
+import es.usj.mastertsa.carcare.repositories.room.reparacionrepository.ReparacionRepository
+import es.usj.mastertsa.carcare.repositories.room.tallerrepository.ITallerRepository
+import es.usj.mastertsa.carcare.repositories.room.tallerrepository.TallerRepository
+import es.usj.mastertsa.carcare.repositories.room.vehiculorepository.IVehiculoRepository
+import es.usj.mastertsa.carcare.repositories.room.vehiculorepository.VehiculoRepository
 import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
-import kotlin.math.sin
 
 
 /**
@@ -46,5 +45,7 @@ val appModule = module {
     single<ITallerRepository>{TallerRepository(get())}
     single<ITallerInteractor>{TallerInteractor(get())}
     viewModel { TalleresActivityPresenter(get()) }
+    //Firebase
+    //single ]}
 
 }

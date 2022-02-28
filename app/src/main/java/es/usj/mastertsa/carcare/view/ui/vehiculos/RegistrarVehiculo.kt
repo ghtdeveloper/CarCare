@@ -2,7 +2,6 @@ package es.usj.mastertsa.carcare.view.ui.vehiculos
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -77,7 +76,6 @@ class RegistrarVehiculo : DialogFragment(), ContractInterface.ViewAddVehicle {
                     addVehicle()
                 }
             }
-
         return bindings.root
     }
 
@@ -93,7 +91,7 @@ class RegistrarVehiculo : DialogFragment(), ContractInterface.ViewAddVehicle {
 
     override fun addVehicle()
     {
-        if(bindings.tvMarca.text.isNullOrEmpty() ||  bindings.tvModelo.text.isNullOrEmpty()
+        if(  bindings.tvModelo.text.isNullOrEmpty()
             ||bindings.tvAnioFabricacion.text.isNullOrEmpty() || bindings.tvColor.text.isNullOrEmpty()
             || bindings.tvVIN.text.isNullOrEmpty() || bindings.tvAlias.text.isNullOrEmpty())
         {

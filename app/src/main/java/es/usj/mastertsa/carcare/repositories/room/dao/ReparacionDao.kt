@@ -1,4 +1,4 @@
-package es.usj.mastertsa.carcare.repositories.dao
+package es.usj.mastertsa.carcare.repositories.room.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -6,7 +6,6 @@ import androidx.room.Query
 import es.usj.mastertsa.carcare.domain.Reparacion
 import es.usj.mastertsa.carcare.domain.Taller
 import es.usj.mastertsa.carcare.domain.Vehiculo
-import io.reactivex.Completable
 
 @Dao
 interface ReparacionDao {

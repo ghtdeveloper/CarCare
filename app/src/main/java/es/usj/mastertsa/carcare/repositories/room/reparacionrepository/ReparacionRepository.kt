@@ -1,9 +1,9 @@
-package es.usj.mastertsa.carcare.repositories.reparacionrepository
+package es.usj.mastertsa.carcare.repositories.room.reparacionrepository
 
 import es.usj.mastertsa.carcare.domain.Reparacion
 import es.usj.mastertsa.carcare.domain.Taller
 import es.usj.mastertsa.carcare.domain.Vehiculo
-import es.usj.mastertsa.carcare.repositories.dao.ReparacionDao
+import es.usj.mastertsa.carcare.repositories.room.dao.ReparacionDao
 
 
 /**

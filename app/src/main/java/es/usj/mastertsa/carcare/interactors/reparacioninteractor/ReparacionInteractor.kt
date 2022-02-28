@@ -3,7 +3,7 @@ package es.usj.mastertsa.carcare.interactors.reparacioninteractor
 import es.usj.mastertsa.carcare.domain.Reparacion
 import es.usj.mastertsa.carcare.domain.Taller
 import es.usj.mastertsa.carcare.domain.Vehiculo
-import es.usj.mastertsa.carcare.repositories.reparacionrepository.IReparacionRepository
+import es.usj.mastertsa.carcare.repositories.room.reparacionrepository.IReparacionRepository
 
 
 /**

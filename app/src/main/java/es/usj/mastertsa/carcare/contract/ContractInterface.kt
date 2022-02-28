@@ -3,6 +3,8 @@ package es.usj.mastertsa.carcare.contract
 import android.app.Activity
 import android.content.Context
 import androidx.fragment.app.FragmentManager
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
 import es.usj.mastertsa.carcare.domain.Reparacion
 import es.usj.mastertsa.carcare.domain.Taller
 import es.usj.mastertsa.carcare.domain.Vehiculo
@@ -102,6 +104,7 @@ interface ContractInterface
         fun findByID(idVehiculo: Long): Vehiculo
 
         fun delete(idVehiculo: Long)
+
     }
 
     interface ITallerPresenter
@@ -110,6 +113,15 @@ interface ContractInterface
 
         fun save(taller: Taller)
     }
+
+    interface IFirebasePresenter
+    {
+        fun getListMarks(): CollectionReference?
+
+        fun getListModels(idMarca: String): DocumentReference?
+    }
+
+
 
 
 

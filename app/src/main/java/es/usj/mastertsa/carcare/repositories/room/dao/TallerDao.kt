@@ -1,4 +1,4 @@
-package es.usj.mastertsa.carcare.repositories.dao
+package es.usj.mastertsa.carcare.repositories.room.dao
 
 import androidx.room.Dao
 import androidx.room.Insert

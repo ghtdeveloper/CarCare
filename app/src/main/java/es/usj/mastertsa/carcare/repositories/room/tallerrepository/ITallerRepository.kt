@@ -1,7 +1,5 @@
-package es.usj.mastertsa.carcare.repositories.tallerrepository
+package es.usj.mastertsa.carcare.repositories.room.tallerrepository
 
-import androidx.room.Insert
-import androidx.room.Query
 import es.usj.mastertsa.carcare.domain.Taller
 
 

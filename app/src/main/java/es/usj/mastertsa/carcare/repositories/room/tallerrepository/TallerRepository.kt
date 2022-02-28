@@ -1,7 +1,7 @@
-package es.usj.mastertsa.carcare.repositories.tallerrepository
+package es.usj.mastertsa.carcare.repositories.room.tallerrepository
 
 import es.usj.mastertsa.carcare.domain.Taller
-import es.usj.mastertsa.carcare.repositories.dao.TallerDao
+import es.usj.mastertsa.carcare.repositories.room.dao.TallerDao
 
 
 /**

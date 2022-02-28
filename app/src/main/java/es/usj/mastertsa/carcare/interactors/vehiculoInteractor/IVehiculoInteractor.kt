@@ -1,5 +1,7 @@
 package es.usj.mastertsa.carcare.interactors.vehiculoInteractor
 
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
 import es.usj.mastertsa.carcare.domain.Vehiculo
 
 

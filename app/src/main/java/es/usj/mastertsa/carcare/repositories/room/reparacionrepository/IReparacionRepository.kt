@@ -1,9 +1,8 @@
-package es.usj.mastertsa.carcare.repositories.reparacionrepository
+package es.usj.mastertsa.carcare.repositories.room.reparacionrepository
 
 import es.usj.mastertsa.carcare.domain.Reparacion
 import es.usj.mastertsa.carcare.domain.Taller
 import es.usj.mastertsa.carcare.domain.Vehiculo
-import io.reactivex.Observable
 
 
 /**

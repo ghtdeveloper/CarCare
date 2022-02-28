@@ -1,6 +1,8 @@
 package es.usj.mastertsa.carcare.presenter
 
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
 import es.usj.mastertsa.carcare.contract.ContractInterface
 import es.usj.mastertsa.carcare.domain.Vehiculo
 import es.usj.mastertsa.carcare.interactors.vehiculoInteractor.IVehiculoInteractor
@@ -40,5 +42,7 @@ class VehiculosActivityPresenter(private val iVehiculoInteractor: IVehiculoInter
     override fun delete(idVehiculo: Long) {
         iVehiculoInteractor.delete(idVehiculo)
     }
+
+
 
 }
