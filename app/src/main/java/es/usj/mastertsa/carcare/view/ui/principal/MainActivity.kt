@@ -2,6 +2,7 @@ package es.usj.mastertsa.carcare.view.ui.principal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.firebase.FirebaseApp
 import es.usj.mastertsa.carcare.R
 import es.usj.mastertsa.carcare.contract.ContractInterface
 import es.usj.mastertsa.carcare.databinding.ActivityMainBinding
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity(),ContractInterface.ViewMainActivity
         val view = binding.root
         setContentView(view)
         //Init Presenter
+        FirebaseApp.initializeApp(this)
         presenter = MainActivityPresenter(this)
         initView()
     }

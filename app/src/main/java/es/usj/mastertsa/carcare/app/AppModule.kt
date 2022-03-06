@@ -46,6 +46,9 @@ val appModule = module {
     single<ITallerInteractor>{TallerInteractor(get())}
     viewModel { TalleresActivityPresenter(get()) }
     //Firebase
-    //single ]}
+   /* single{get<AppFirebaseDB>().getDBFirebase()}
+    single<IFirebaseRepository>{FirebaseRepository()}
+    single<IFirebaseInteractor>{FirebaseInteractor(get())}
+    viewModel{FirebaseActivityPresenter(get())}*/
 
 }

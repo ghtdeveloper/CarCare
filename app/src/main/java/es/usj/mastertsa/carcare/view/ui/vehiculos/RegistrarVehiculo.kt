@@ -26,6 +26,7 @@ class RegistrarVehiculo : DialogFragment(), ContractInterface.ViewAddVehicle {
     //presenter
     private val presenter: VehiculosActivityPresenter? by viewModel()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if  (vehiculo != null) {
@@ -39,6 +40,7 @@ class RegistrarVehiculo : DialogFragment(), ContractInterface.ViewAddVehicle {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         // Inflate the layout for this fragment
             bindings =  FragmentRegistrarVehiculoBinding.inflate(inflater, container,
                 false)
@@ -76,6 +78,8 @@ class RegistrarVehiculo : DialogFragment(), ContractInterface.ViewAddVehicle {
                     addVehicle()
                 }
             }
+
+
         return bindings.root
     }
 

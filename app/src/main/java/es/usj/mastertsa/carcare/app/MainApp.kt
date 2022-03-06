@@ -1,6 +1,7 @@
 package es.usj.mastertsa.carcare.app
 
 import android.app.Application
+import com.google.firebase.FirebaseApp
 import org.koin.android.ext.android.startKoin
 
 
@@ -16,6 +17,7 @@ class MainApp : Application()
     {
         super.onCreate()
         startKoin(this, listOf(appModule))
+
     }
 
 }

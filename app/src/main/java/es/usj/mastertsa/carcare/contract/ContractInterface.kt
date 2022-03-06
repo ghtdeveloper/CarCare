@@ -64,6 +64,8 @@ interface ContractInterface
     }
 
 
+
+
     //Presenter ***********************************************************************************
 
     interface PresenterMainActivity
@@ -116,9 +118,9 @@ interface ContractInterface
 
     interface IFirebasePresenter
     {
-        fun getListMarks(): CollectionReference?
+        //fun getListMarks(): CollectionReference?
 
-        fun getListModels(idMarca: String): DocumentReference?
+        //fun getListMarksUpdt()
     }
 
 

@@ -32,10 +32,10 @@ class FragmentoVehiculos : Fragment(), AdaptadorVehiculo.onClickItemVehiculo,Ada
     //Presenter
     private val presenter: VehiculosActivityPresenter by viewModel()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
         }
     }
 
@@ -67,12 +67,16 @@ class FragmentoVehiculos : Fragment(), AdaptadorVehiculo.onClickItemVehiculo,Ada
                     initRecycler(vehiculosList)
                 })
             }
+
         }
         return bindings.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        bindings.floatingActionButton.setOnClickListener {   loadRegistrarVehiculo()}
+
+        bindings.floatingActionButton.setOnClickListener {
+            loadRegistrarVehiculo()
+        }
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -90,6 +94,8 @@ class FragmentoVehiculos : Fragment(), AdaptadorVehiculo.onClickItemVehiculo,Ada
         val fm = activity?.supportFragmentManager
         val fragmentoVehiculo = RegistrarVehiculo()
         if (fm != null) {
+            val bundle = Bundle()
+            bundle.putString("accion","registro_nuevo")
             fragmentoVehiculo.show(fm,"fragmentoVehiculo")
         }
     }
