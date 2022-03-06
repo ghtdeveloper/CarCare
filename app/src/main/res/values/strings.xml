@@ -1,3 +1,64 @@
 <resources>
     <string name="app_name">CarCare</string>
+    <!--Menu Bottom Navegation''-->
+    <string name="text_menu_historial_reparaciones">Hist Reparaciones</string>
+    <string name="text_menu_reparaciones">Reparaciones</string>
+    <string name="text_menu_vehiculos">Vehículos</string>
+    <string name="text_menu_talleres">Talleres</string>
+    <!--Data Dummy -->
+    <string name="text_reparacion_dummy">Cambio de Aceite</string>
+    <string name="text_fecha_reparacion_dummy">10 Jul.2021</string>
+    <string name="tex_taller_reparacion_dummy">Autoservicio Mejia</string>
+    <!--Vehiculos -->
+    <string name="text_info_vehiculo_dummy">Kia K5 Azul</string>
+    <string name="text_chasis_dummy">AKFAFAFAACASF</string>
+    <string name="text_tipo_dummy">Sedán</string>
+    <string name="text_info_vehiculo_dummy_2">Hyundai Sonata Blanco</string>
+    <string name="text_chasis_dummy_2">ACAFAFAXXA</string>
+    <string name="text_tipo_dummy_2">Sedán</string>
+    <string name="text_info_vehiculo_dummy_3">Porsche Cayene Verde</string>
+    <string name="text_chasis_dummy_3">ACAGAFQSAFAF</string>
+    <string name="text_tipo_dummy_3">SUV</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Dialogo Registrar Taller-->
+    <string name="text_registar_taller">Registrar Taller</string>
+    <string name="text_nombre_taller">Nombre</string>
+    <string name="text_registrar">Registrar</string>
+    <string name="text_cancelar">Cancelar</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="text_fecha_entrada">Fecha entrada</string>
+    <string name="text_fecha_salida_taller">Fecha salida</string>
+    <string name="text_direccion">Dirección</string>
+    <string name="text_No_Campos_vacios">Debe de completar los campos vacios</string>
+    <string name="textimg">Imagen</string>
+    <string name="text_info_taller_found">No existe ningún taller registrado!</string>
+    <string name="text_info_reparacion_found">No existe ninguna reparación registrada!</string>
+    <string name="text_info_vehiculo_found">No existe ningún vehículo registrado!</string>
+    <string name="tipo_de_servicio">Tipo de Servicio</string>
+    <string name="notas">Notas</string>
+    <string name="taller">Taller</string>
+    <!--List Item Vehiculo-->
+    <string name="textAgregadoDesde">Registrado :</string>
+    <string name="textFechaExample">10-Enero-2019</string>
+    <string name="textVIN">VIN:</string>
+    <string name="textMarca">Marca:</string>
+    <string name="textModelo">Modelo:</string>
+    <string name="textAlias">Alias:</string>
+    <string name="textAño">Año:</string>
+    <string name="textValuexx">xxxxxxx</string>
+    <string name="textEliminar">Eliminar</string>
+    <string name="textTituloDeleteVehiculo">¿Deseas eliminar este vehículo ?</string>
+    <string name="textEliminarDialogo">Eliminar</string>
+    <string name="textMessageVehiculoEliminado">Vehículo eliminado exitosamente!</string>
+    <string name="textEditar">Editar</string>
+    <!--List Item Reparacion-->
+    <string name="textInfoVehiculo">Información del vehículo:</string>
+    <string name="textFechaEntrada">Fecha Entrada/Registro:</string>
+    <string name="textTipoReparacion">Tipo de Reparación:</string>
+    <string name="textTituloDeleteReparacion">¿Deseas eliminar esta reparación?</string>
+    <string name="textMessageReparacionEliminado">Reparación eliminado exitosamente!</string>
+
+
 </resources>

@@ -1,0 +1,114 @@
+{
+  "project_info": {
+    "project_number": "285575272313",
+    "firebase_url": "https://nemesis-cdfae.firebaseio.com",
+    "project_id": "nemesis-cdfae",
+    "storage_bucket": "nemesis-cdfae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285575272313:android:5cd00b302beb0adcba01a8",
+        "android_client_info": {
+          "package_name": "com.example.rapidcentroapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285575272313-2rvb193s7drh1qdglfr7bpgnfjee7qp3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rapidcentroapp",
+            "certificate_hash": "8b63558f74741423f9c92bd2b94d101badfcf641"
+          }
+        },
+        {
+          "client_id": "285575272313-08thgtfpvvim90usjjr2470scbuq1l51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTZXgOKgFPIx-WV_Sd6TmgeycVZkMU20c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285575272313-08thgtfpvvim90usjjr2470scbuq1l51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285575272313:android:e2016844560921f0ba01a8",
+        "android_client_info": {
+          "package_name": "com.ssd.carwash.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285575272313-ft5var8qulljphtm7s0tfrmc4kqgcgos.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ssd.carwash.app",
+            "certificate_hash": "ab00bbeba2667f2ade302b6a535d56f8a91a4554"
+          }
+        },
+        {
+          "client_id": "285575272313-08thgtfpvvim90usjjr2470scbuq1l51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTZXgOKgFPIx-WV_Sd6TmgeycVZkMU20c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285575272313-08thgtfpvvim90usjjr2470scbuq1l51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:285575272313:android:d4075c91fb5dd243ba01a8",
+        "android_client_info": {
+          "package_name": "es.usj.mastertsa.carcare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "285575272313-08thgtfpvvim90usjjr2470scbuq1l51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTZXgOKgFPIx-WV_Sd6TmgeycVZkMU20c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "285575272313-08thgtfpvvim90usjjr2470scbuq1l51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
