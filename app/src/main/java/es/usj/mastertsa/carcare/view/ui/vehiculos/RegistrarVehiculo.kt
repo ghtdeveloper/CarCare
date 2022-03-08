@@ -2,9 +2,11 @@ package es.usj.mastertsa.carcare.view.ui.vehiculos
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +14,7 @@ import es.usj.mastertsa.carcare.R
 import es.usj.mastertsa.carcare.contract.ContractInterface
 import es.usj.mastertsa.carcare.databinding.FragmentRegistrarVehiculoBinding
 import es.usj.mastertsa.carcare.domain.Vehiculo
+import es.usj.mastertsa.carcare.presenter.FirebasePresenter
 import es.usj.mastertsa.carcare.presenter.VehiculosActivityPresenter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,13 +28,16 @@ class RegistrarVehiculo : DialogFragment(), ContractInterface.ViewAddVehicle {
     var vehiculo: Vehiculo? = null
     //presenter
     private val presenter: VehiculosActivityPresenter? by viewModel()
-
+    private var presenterFirebase: FirebasePresenter? = null
+    private lateinit var listMarks:ArrayList<String>
+    private lateinit var valueSelectSpinnerVehiculo : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //OnCreate
+        presenterFirebase = FirebasePresenter()
         if  (vehiculo != null) {
-
-            bindings.tvMarca.setText(vehiculo!!.marca)
+           // bindings.tvMarca.setText(vehiculo!!.marca)
             bindings.tvAlias.setText(vehiculo!!.alias)
         }
     }
@@ -44,7 +50,6 @@ class RegistrarVehiculo : DialogFragment(), ContractInterface.ViewAddVehicle {
         // Inflate the layout for this fragment
             bindings =  FragmentRegistrarVehiculoBinding.inflate(inflater, container,
                 false)
-            bindings.tvMarca.setText(arguments?.getString("marca"))
             bindings.tvAlias.setText(arguments?.getString("alias"))
             bindings.tvModelo.setText(arguments?.getString("modelo"))
             bindings.tvAnioFabricacion.setText(arguments?.getString("anioFabricacion"))
@@ -53,7 +58,6 @@ class RegistrarVehiculo : DialogFragment(), ContractInterface.ViewAddVehicle {
             //Log.d("DATA OPERACION",arguments?.getString("typeOperation").toString())
             if(arguments?.getString("typeOperation").toString() =="editar")
             {
-                bindings.tvMarca.setBackgroundColor(Color.YELLOW)
                 bindings.tvModelo.setBackgroundColor(Color.YELLOW)
                 bindings.tvColor.setBackgroundColor(Color.YELLOW)
                 bindings.saveButton.text = "Editar"
@@ -61,8 +65,8 @@ class RegistrarVehiculo : DialogFragment(), ContractInterface.ViewAddVehicle {
                     lifecycleScope.launch {
                         withContext(Dispatchers.IO)
                         {
-                            arguments?.getLong("id")?.let { it1 ->
-                                presenter?.update(bindings.tvMarca.text.toString(),
+                           arguments?.getLong("id")?.let { it1 ->
+                                presenter?.update(valueSelectSpinnerVehiculo,
                                     bindings.tvModelo.text.toString(),bindings.tvColor.text.toString(),
                                     it1)
                             }
@@ -70,7 +74,6 @@ class RegistrarVehiculo : DialogFragment(), ContractInterface.ViewAddVehicle {
                     }
                     dismiss()
                 }
-
             }
             else
             {
@@ -78,9 +81,13 @@ class RegistrarVehiculo : DialogFragment(), ContractInterface.ViewAddVehicle {
                     addVehicle()
                 }
             }
-
-
         return bindings.root
+    }
+
+    @Override
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loadSpinnerMarcas()
     }
 
     override fun onResume() {
@@ -107,14 +114,13 @@ class RegistrarVehiculo : DialogFragment(), ContractInterface.ViewAddVehicle {
                 withContext(Dispatchers.IO)
                 {
                         presenter?.save(
-                            Vehiculo( marca = bindings.tvMarca.text.toString()
+                            Vehiculo( marca = valueSelectSpinnerVehiculo
                                 ,modelo =bindings.tvModelo.text.toString(), anioFabricacion =
                                 bindings.tvAnioFabricacion.text.toString()
                                 ,color = bindings.tvColor.text.toString(),
                                 chasis = bindings.tvVIN.text.toString(),
                                 alias = bindings.tvAlias.text.toString())
                         )
-
                 }
                 Toast.makeText(requireContext(),"Vehículo registrado exitosmente!",
                     Toast.LENGTH_LONG).show()
@@ -125,6 +131,42 @@ class RegistrarVehiculo : DialogFragment(), ContractInterface.ViewAddVehicle {
                     ?.replace(R.id.fragment_container_view,fragmentoVehiculo,
                         "vehiculo_principal")?.commit()
             }
+        }
+    }
+
+    override fun loadSpinnerMarcas() {
+        listMarks = ArrayList()
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO)
+            {
+                presenterFirebase!!.getListMarks().get().addOnSuccessListener { result ->
+                    for (document in result) { listMarks.add(document.id) }
+                    bindings.spinnerMarcaVehiculo.item = listMarks as List<Any>?
+                    listMarks.forEachIndexed() { index,it ->
+                        if(it==arguments?.getString("marca"))
+                        {
+                            setSelectionSpinnerTalleres(index)
+                        }
+                    }
+                }
+            }
+        }
+        listenerSpinner()
+    }
+
+    override fun setSelectionSpinnerTalleres(valoSet: Int) {
+        bindings.spinnerMarcaVehiculo.setSelection(valoSet)
+    }
+
+    override fun listenerSpinner()
+    {
+        bindings.spinnerMarcaVehiculo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener
+        {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long)
+            {
+                valueSelectSpinnerVehiculo = listMarks[position]
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
         }
     }
 

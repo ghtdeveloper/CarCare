@@ -15,8 +15,7 @@ tools:context=".view.ui.vehiculos.RegistrarVehiculo">
     android:padding="32dp">
 
 
-    <!--Marca-->
-
+    <!--Marca
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
@@ -28,8 +27,23 @@ tools:context=".view.ui.vehiculos.RegistrarVehiculo">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Marca" />
-
     </com.google.android.material.textfield.TextInputLayout>
+    -->
+    <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+        android:id="@+id/spinnerMarcaVehiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:smsp_floatingLabelColor="#1976D2"
+        app:smsp_hint="@string/textSpinnerMarca"
+        app:smsp_hintColor="@color/primaryColor"
+        app:smsp_isOutlined="true"
+        app:smsp_itemColor="@color/primaryTextColor"
+        app:smsp_itemListColor="#7C4DFF"
+        app:smsp_itemListHintBackgroundColor="#808080"
+        app:smsp_itemListHintColor="#FFFFFF"
+        app:smsp_multilineError="false"
+        app:smsp_selectedItemListColor="@color/secondaryColor" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"

@@ -15,6 +15,7 @@ import es.usj.mastertsa.carcare.adaptador.AdaptadorVehiculo
 import es.usj.mastertsa.carcare.contract.ContractInterface
 import es.usj.mastertsa.carcare.databinding.FragmentoVehiculosBinding
 import es.usj.mastertsa.carcare.domain.Vehiculo
+import es.usj.mastertsa.carcare.presenter.FirebasePresenter
 import es.usj.mastertsa.carcare.presenter.VehiculosActivityPresenter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,11 +33,9 @@ class FragmentoVehiculos : Fragment(), AdaptadorVehiculo.onClickItemVehiculo,Ada
     //Presenter
     private val presenter: VehiculosActivityPresenter by viewModel()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
+        arguments?.let {}
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -75,7 +74,7 @@ class FragmentoVehiculos : Fragment(), AdaptadorVehiculo.onClickItemVehiculo,Ada
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         bindings.floatingActionButton.setOnClickListener {
-            loadRegistrarVehiculo()
+        loadRegistrarVehiculo()
         }
         super.onViewCreated(view, savedInstanceState)
     }
@@ -134,7 +133,6 @@ class FragmentoVehiculos : Fragment(), AdaptadorVehiculo.onClickItemVehiculo,Ada
                     else
                     {
                         presenter.delete(adapter.id)
-
                     }
                 }
             }
