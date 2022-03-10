@@ -11,11 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?colorPrimary"
-        app:labelVisibilityMode="labeled"
-        app:itemIconTint="@color/secondaryTextColor"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
         app:itemTextColor="@color/secondaryTextColor"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu_bottom_navegation" />
+        app:menu="@menu/menu_bottom_navegation"
+        tools:layout_editor_absoluteX="0dp" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container_view"
