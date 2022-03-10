@@ -55,6 +55,9 @@ interface ContractInterface
     interface ViewAddVehicle
     {
         fun addVehicle()
+        fun loadSpinnerMarcas()
+        fun setSelectionSpinnerTalleres(valoSet: Int)
+        fun listenerSpinner()
     }
 
     interface ViewFragmentVehicle
@@ -118,8 +121,7 @@ interface ContractInterface
 
     interface IFirebasePresenter
     {
-        //fun getListMarks(): CollectionReference?
-
+        fun getListMarks(): CollectionReference?
         //fun getListMarksUpdt()
     }
 

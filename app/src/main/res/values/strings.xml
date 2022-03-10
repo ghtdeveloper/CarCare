@@ -59,6 +59,7 @@
     <string name="textTipoReparacion">Tipo de Reparación:</string>
     <string name="textTituloDeleteReparacion">¿Deseas eliminar esta reparación?</string>
     <string name="textMessageReparacionEliminado">Reparación eliminado exitosamente!</string>
+    <string name="textSpinnerMarca">Marca</string>
 
 
 </resources>
