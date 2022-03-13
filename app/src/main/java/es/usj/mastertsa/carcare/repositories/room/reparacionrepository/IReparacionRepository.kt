@@ -1,6 +1,7 @@
 package es.usj.mastertsa.carcare.repositories.room.reparacionrepository
 
 import es.usj.mastertsa.carcare.domain.Reparacion
+import es.usj.mastertsa.carcare.domain.ReparacionAndTallerVehiculo
 import es.usj.mastertsa.carcare.domain.Taller
 import es.usj.mastertsa.carcare.domain.Vehiculo
 
@@ -23,4 +24,5 @@ interface IReparacionRepository
     fun findAllTaller():MutableList<Taller>
 
     fun delete(idReparacion: Long)
+
 }

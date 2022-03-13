@@ -9,7 +9,7 @@ import es.usj.mastertsa.carcare.repositories.room.dao.ReparacionDao
 import es.usj.mastertsa.carcare.repositories.room.dao.TallerDao
 import es.usj.mastertsa.carcare.repositories.room.dao.VehiculoDao
 
-@Database(entities = [Vehiculo::class, Taller::class, Reparacion::class], version = 1,
+@Database(entities = [Vehiculo::class, Taller::class, Reparacion::class], version = 2,
     exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 

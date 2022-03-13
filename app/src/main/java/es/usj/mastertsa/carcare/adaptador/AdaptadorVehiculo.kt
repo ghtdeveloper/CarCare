@@ -60,7 +60,7 @@ class AdaptadorVehiculo(val vehiculos: List<Vehiculo>, private val context: Cont
             view.findViewById<TextView>(R.id.textViewValueAlias).text = vehiculo.alias
             view.findViewById<TextView>(R.id.textViewValueYear).text = vehiculo.anioFabricacion
             view.findViewById<FloatingActionButton>(R.id.fltBtnEliminarVehiculo).setOnClickListener {
-                id = vehiculo.id
+                id = vehiculo.vehiculoId
                 listenerDelete.onClickDelete()
             }
 
@@ -71,7 +71,7 @@ class AdaptadorVehiculo(val vehiculos: List<Vehiculo>, private val context: Cont
                 color = vehiculo.color
                 chasis = vehiculo.chasis
                 alias = if (!vehiculo.alias.isNullOrBlank())  vehiculo.alias else " "
-                id = vehiculo.id
+                id = vehiculo.vehiculoId
                 listener.onClick()
 
             }

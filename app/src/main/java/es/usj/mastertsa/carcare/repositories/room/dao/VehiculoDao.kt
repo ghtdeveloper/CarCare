@@ -11,15 +11,15 @@ interface VehiculoDao {
     @Query("Select * from vehiculo")
     fun findAll():MutableList<Vehiculo>
 
-    @Query("Select * FROM vehiculo WHERE id = :idVehiculo")
+    @Query("Select * FROM vehiculo WHERE vehiculoId = :idVehiculo")
     fun findByID(idVehiculo: Long): Vehiculo
 
     @Insert
     fun save(vehiculo: Vehiculo)
 
-    @Query("Update vehiculo set marca =:marca,modelo=:modelo,color=:color where id=:idVehiculo ")
+    @Query("Update vehiculo set marca =:marca,modelo=:modelo,color=:color where vehiculoId=:idVehiculo ")
     fun update(marca:String,modelo:String,color:String,idVehiculo: Long)
 
-    @Query("Delete FROM vehiculo WHERE id = :idVehiculo")
+    @Query("Delete FROM vehiculo WHERE vehiculoId = :idVehiculo")
     fun delete(idVehiculo: Long)
 }

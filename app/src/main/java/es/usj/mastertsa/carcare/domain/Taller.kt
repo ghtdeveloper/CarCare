@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "taller")
 data class Taller(
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+    val tallerId: Long = 0,
     val nombre : String,
     val direccion : String,
     val latitud : String,

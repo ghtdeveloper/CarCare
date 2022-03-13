@@ -3,7 +3,9 @@ package es.usj.mastertsa.carcare.repositories.room.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Transaction
 import es.usj.mastertsa.carcare.domain.Reparacion
+import es.usj.mastertsa.carcare.domain.ReparacionAndTallerVehiculo
 import es.usj.mastertsa.carcare.domain.Taller
 import es.usj.mastertsa.carcare.domain.Vehiculo
 
@@ -27,5 +29,9 @@ interface ReparacionDao {
 
   @Query("Delete FROM reparacion WHERE id = :idReparacion")
   fun delete(idReparacion: Long)
+
+  @Transaction
+  @Query("select * from taller")
+  fun getTallerAndVehiculo() : List<ReparacionAndTallerVehiculo>
 
 }
